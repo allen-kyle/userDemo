@@ -1,71 +1,44 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.UserDao;
 import com.example.demo.model.PO.Good;
+import com.example.demo.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class LoginController {
 
     @Autowired
-    private UserDao userDao;
+    private IGoodsService goodsService;
 
     @PostMapping("/register")
-    public  String loginVerify(Good good){
-        Date date = new Date();
-        good.setCreateTime(date);
-        good.setUpdateTime(date);
-        good.setDeleteFlag(0);
-
-//        String encryptPassword =  MD5Util.computeMD5(user.getPassword());
-//        user.setPassword(encryptPassword);
-
-
-        userDao.addGood(good);
-        System.out.println("good = [" + good + "]");
-        return "{\"status\":\"ok\"}";
-          }
+    public Good addGoods(Good good){
+        return goodsService.addGoods(good);
+    }
 
     @RequestMapping("/select")
-     public Good getPrice(String goods){
+     public Map getPrice(String goodsname){
 
-
-
-        Good good = userDao.getPrice(goods);
-
-        return good;
-     }
+          String price = goodsService.getPrice(goodsname);
+        Map map = new HashMap();
+        map.put("status",price);
+        return map;
+}
 
     @PostMapping("/updatePrice")
     public  String updatePrice(Good good){
-
-        Date date = new Date();
-        good.setCreateTime(date);
-        good.setUpdateTime(date);
-        good.setDeleteFlag(0);
-
-        userDao.updatePrice(good);
-        System.out.println("更改价格成功 = [" + good + "]");
-        return "{\"status\":\"ok\"}";
+        return goodsService.updatePrice(good);
     }
 
 
     @PostMapping("/delGood")
-    public  String delGood(Good good){
-
-        Date date = new Date();
-        good.setCreateTime(date);
-        good.setUpdateTime(date);
-        good.setDeleteFlag(0);
-
-       userDao.delGood(good);
-        System.out.println("删除成功 = [" + good + "]");
-        return "{\"status\":\"ok\"}";
+    public  int delGood(Good good){
+        return goodsService.delGoods(good);
     }
 
 

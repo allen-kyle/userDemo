@@ -11,11 +11,11 @@ public interface UserDao {
             "values(#{goods}, #{price},#{createTime},#{createUserId},#{updateTime},#{updateUserId},#{deleteFlag})")
     int addGood(Good good);
 
-    @Select("select * from goodsinfo where goods = #{goods}")
-    Good getPrice(String goods);
+    @Select("select price from goodsinfo where goods = #{goods}")
+    String getPrice(String goods);
 
     @Delete("delete from goodsinfo where goods = #{goods} and price = #{price}")
-    void delGood(Good good);
+    int delGood(Good good);
 
     @Update("update goodsinfo set price = #{price} where goods = #{goods}")
     int updatePrice(Good good);
