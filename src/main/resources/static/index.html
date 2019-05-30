@@ -7,19 +7,19 @@
     <link href="https://cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.css" rel="stylesheet">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
-        function login() {
-        var username = $('#nameInput').val();
-        var password = $('#passwordInput').val();
-        console.log('login name is ' + username)
-        console.log('login password is ' + password)
+        function addGood() {
+        var goods = $('#nameInput').val();
+        var price = $('#priceInput').val();
+        console.log('goods name is ' + goods)
+        console.log('goods price is ' + price)
 
             $.ajax({
                 type:"POST",
                 url:"/register",
                 dataType:"json",
                 data:{
-                    username:username,
-                    password:password,
+                    goods:goods,
+                    price:price,
                 },
                 success:function(data){
                 console.log(data)
@@ -37,18 +37,18 @@
 
 
 
-     function selectUser() {
-        var usernameTemp = $('#nameInputSelect').val();
-        console.log('login name is ' + usernameTemp)
+     function selectGood() {
+        var goods = $('#nameInputSelect').val();
+        console.log('goods name is ' + goods)
             $.ajax({
                 type:"GET",
                 url:"/select",
                 dataType:"json",
                 data:{
-                    username:usernameTemp
+                    goods:goods
                 },
                 success:function(data){
-                    alert(data.id +"," + data.username + "," + data.password)
+                    alert(data.id +"," + data.goods + "," + data.price)
 
                 },
                 error: function(jqXHR){
@@ -57,19 +57,19 @@
             });
             }
 
-       function delUser() {
-        var username = $('#nameInputDelete').val();
-        var password = $('#passwordInputDelete').val();
-        console.log('login name is ' + username)
-        console.log('login password is ' + password)
+       function delGood() {
+        var goods = $('#nameInputDelete').val();
+        var price = $('#priceInputDelete').val();
+        console.log('goods name is ' + goods)
+        console.log('price password is ' + price)
 
             $.ajax({
                 type:"POST",
-                url:"/delUser",
+                url:"/delGood",
                 dataType:"json",
                 data:{
-                    username:username,
-                    password:password,
+                    goods:goods,
+                    price:price,
                 },
                 success:function(data){
                 console.log(data)
@@ -85,19 +85,19 @@
             });
             }
 
-       function updatePwd(){
-        var username = $('#nameInputUpdate').val();
-        var password = $('#passwordInputNew').val();
+       function updatePrice(){
+        var goods = $('#nameInputUpdate').val();
+        var price = $('#priceInputNew').val();
 
-        console.log('login name is ' + username)
-        console.log('new password is ' + password)
+        console.log('goods name is ' + goods)
+        console.log('new price is ' + price)
             $.ajax({
                 type:"POST",
-                url:"/updatePwd",
+                url:"/updatePrice",
                 dataType:"json",
                 data:{
-                    username:username,
-                    password:password,
+                    goods:goods,
+                    price:price,
                 },
                 success:function(data){
                 console.log(data)
@@ -122,23 +122,23 @@
 <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
 
-username:<input id="nameInput">
-password:<input id="passwordInput">
-<button onclick="login()">注册</button>
+goods:<input id="nameInput">
+price:<input id="priceInput">
+<button onclick="addGood()">添加商品</button>
 <br>
 
-username:<input id="nameInputSelect">
-<button onclick="selectUser()">查询</button>
+goods:<input id="nameInputSelect">
+<button onclick="selectGood()">查询商品</button>
 <br/>
 
-username:<input id="nameInputDelete">
-password:<input id="passwordInputDelete">
-<button onclick="delUser()">删除用户</button>
+goods:<input id="nameInputDelete">
+price:<input id="priceInputDelete">
+<button onclick="delGood()">删除名称</button>
 <br/>
 
-username:<input id="nameInputUpdate">
-password:<input id="passwordInputNew">
-<button onclick="updatePwd()">修改密码</button>
+goods:<input id="nameInputUpdate">
+price:<input id="priceInputNew">
+<button onclick="updatePrice()">修改价格</button>
 
 
 </body>

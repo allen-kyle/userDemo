@@ -5,8 +5,8 @@ import com.example.demo.model.PO.base.BaseEntity;
 import lombok.Data;
 
 @Data
-public class User extends BaseEntity {
+public class Good extends BaseEntity {
 
-    private String goodsname;
+    private String goods;
     private String price;
 }

@@ -1,21 +1,22 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.PO.User;
+import com.example.demo.model.PO.Good;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 public interface UserDao {
-    @Insert("insert into user(id,username, password) values(#{id},#{username}, #{password})")
-    int addUser(User user);
+    @Insert("insert into goodsinfo(goods, price,createTime,createUserId,updateTime,updateUserId,deleteFlag) " +
+            "values(#{goods}, #{price},#{createTime},#{createUserId},#{updateTime},#{updateUserId},#{deleteFlag})")
+    int addGood(Good good);
 
-    @Select("select * from user where username = #{username}")
-    User getName(String username);
+    @Select("select * from goodsinfo where goods = #{goods}")
+    Good getPrice(String goods);
 
-    @Delete("delete from user where username = #{username} and password = #{password}")
-    void delUser(User user);
+    @Delete("delete from goodsinfo where goods = #{goods} and price = #{price}")
+    void delGood(Good good);
 
-    @Update("update user set password = #{password} where username = #{username}")
-    int updatePwd(User user);
+    @Update("update goodsinfo set price = #{price} where goods = #{goods}")
+    int updatePrice(Good good);
 }
